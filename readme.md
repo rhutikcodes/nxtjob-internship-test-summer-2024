@@ -6,7 +6,7 @@
 
 To advance in this opportunity, complete the following tasks and submit a PR (Pull Request) to this repository.
 
-Your task is to build a simplified clone of Calendly, a popular scheduling tool. This application will allow users to schedule calls, update availability, set up reminders, and send emails.
+Your task is to build a community app where users can post content, receive real-time updates, react to posts, and comment on each other's posts.
 
 Firstly, clone this repository or download it as a zip file. Inside the repository, you'll find a folder named `intern_challenge`. Make a copy of this folder and rename it to your full name, using snake_case for spaces (for instance, john_doe). Inside this folder, you will find two `'answers.txt'` files located in the `'technical'` and `'non_technical'` subfolders. Edit these files with your responses.
 
