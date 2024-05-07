@@ -1,17 +1,24 @@
-
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import SideBar from './components/shared/SideBar'
 import NavBar from './components/shared/NavBar'
 import PostBody from './components/shared/PostBody'
-import CreatePost from './components/shared/CreatePost'
 import { Theme } from '@radix-ui/themes'
+import { store } from './store'
+import { Provider } from 'react-redux'
+
+
 
 
 export default function Page() {
 
- 
+
+
+
+
   return (
     <div>
+        <Provider store={store}>
 <Theme>
       <div className='flex'>
       <SideBar/>
@@ -22,6 +29,7 @@ export default function Page() {
       </div>
       </div>
       </Theme>
+      </Provider>
     </div>
   )
 }

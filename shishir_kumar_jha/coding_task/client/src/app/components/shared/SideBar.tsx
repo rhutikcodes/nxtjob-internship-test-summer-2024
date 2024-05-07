@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { UserButton } from '@clerk/nextjs'
 export default function SideBar() {
   return (
     <main className='w-[280px] h-[1475px] border-r-[1px] border-gray-300 bg-[#FFFF]'>
@@ -134,6 +135,7 @@ export default function SideBar() {
 
 </div>
 </div>
+<UserButton/>
     </main>
   )
 }

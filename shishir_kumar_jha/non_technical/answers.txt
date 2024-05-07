@@ -1,0 +1,12 @@
+
+1. How do you stay updated on software development topics and remain active in the community? (Forums/Discord/Slack/Meetups/Twitter/Blogs)
+->
+
+2. What are your most-used IDE and keyboard shortcuts when coding?
+->
+
+3. How do you approach the design and implementation of a scalable backend system? Feel free to attach code snippets for better explanation.
+->
+
+4. How do you ensure that your frontend code is functional and reliable? What are your favorite testing methods and tools?
+->

@@ -1,0 +1,20 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["driverAdapters"]
+  }
+  
+  datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+  }
+  
+  model User {
+    id    Int     @id @default(autoincrement())
+    email String  @unique
+    name  String?
+  }
+  
+  // npx wrangler d1 migrations create coding-task create_user_table
+
+
+  // npx prisma migrate diff --from-empty --to-schema-datamodel ./prisma/schema.prisma --script --output migrations/0001_create_user_table.sql
