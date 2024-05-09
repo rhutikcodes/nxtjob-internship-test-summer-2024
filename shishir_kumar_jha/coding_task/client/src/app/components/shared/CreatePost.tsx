@@ -1,13 +1,100 @@
-import React from 'react'
+
+"use client"
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import Tag from './Tag'
 import CreatePostIcons from './CreatePostIcons'
 import Button from './Button'
+import { UseSelector,useDispatch, useSelector } from 'react-redux'
+import { RootState,AppDispatch } from '../../store'
+import { PostComponent } from '@/features/userData/userDataSlice'
+import { useState } from 'react'
 
 
 export default function CreatePost() {
+//web socket logic
+
+const [content,setContent] = useState<string>("");
+const [ws, setWs] = useState<WebSocket | null>(null);
+
+
+useEffect(() => {
+  
+  console.log("useEffect called 1");
+  websocket()
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+}, []);
+
+
+
+    async function websocket() {
+    
+      const newWs = new WebSocket("wss://coding-task.shishirkj08.workers.dev/ws");
+
+      newWs.addEventListener('open', () => {
+        console.log('Opened websocket');
+        setContent('');
+      });
+  
+      newWs.addEventListener('message', ({data}) => {
+        console.log('Message received from server');
+        console.log(data);
+   
+      });
+  
+      newWs.addEventListener('close', () => {
+        console.log('Closed websocket');
+        setContent('');
+      });
+  
+      setWs(newWs);    
+    }
+
+
+
+
+    const closeConnection = () => {
+      if (ws) {
+        ws.close();
+      }
+      else
+      { 
+        console.log("ws is null")
+      }
+    };
+
+
+
+
+
+
+ function sendPost(e:React.MouseEvent<HTMLElement>)
+{
+     ws?.send(content)
+
+    setContent('') 
+}
+
+
+
+
+
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  // let showcreatePostComponent = useSelector((state:RootState)=>state.userInfo.showcreatePostComponent)
+ 
+
+
+const PostToogle = ()=>{ 
+  closeConnection()
+ dispatch(PostComponent())
+}
+
+
   return (
-    <div className='flex justify-center mt-28 '>
+    <div className='flex justify-center mt-28 mr-[45px]'>
  <main className='w-[720px] h-[565px] z-[10] overflow-hidden rounded-2xl bg-[#ffffff]'>
 
 <header className='w-[720px] h-[80px]  py-3 px-4 flex justify-between bg-[#f7f7f8]'>
@@ -18,16 +105,15 @@ export default function CreatePost() {
 </div>
 {/* cross icon */}
 <div>
-    <Image src={"/cross.svg"} alt='cross' height={14} width={14} className='mt-3 mr-1'/>
+    <Image  onClick={PostToogle} src={"/cross.svg"} alt='cross' height={14} width={14} className='mt-3 mr-1 cursor-pointer'/>
 </div>
     </header>
 
 
 
 {/* hero section of create post */}
-<section className='w-[720px]   h-[321px] py-3 px-4'>
-<p className='w-[237px] text-sm  h-[24px] text-[#8a8aa3] leading-6 line-1.5 font-normal font-inter '>What do you want to talk about</p>
-</section>
+<textarea value={content}  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>setContent(e.target.value)}  placeholder='What do you want to talk about' className='w-[720px]   h-[321px] py-3 px-4'>
+</textarea>
 
 
 {/* tag section */}
@@ -71,11 +157,11 @@ export default function CreatePost() {
         {/* buttons */}
 
         <section className='flex mt-2 gap-6'>
-    <Button className='w-[109px] h-[48px] border-gray-300 text-[#334155] bg-[#ffffff]'>
+    <Button onClick={PostToogle} className='w-[109px] h-[48px] border-gray-300 text-[#334155] bg-[#ffffff]'>
   Cancel
 </Button>
 
-<Button className='w-[109px] mr-5 h-[48px] border-[#0f172a] text-[#ffffff] bg-[#fe5bac]'>
+<Button onClick={sendPost} className='w-[109px] mr-5 h-[48px] border-[#0f172a] text-[#ffffff] bg-[#fe5bac]'>
   Post
 </Button>
         </section>

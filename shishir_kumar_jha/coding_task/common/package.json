@@ -12,8 +12,9 @@
     "lint": "tsc"
   },
   "devDependencies": {
+    "coding-project": "^0.0.5",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
-    "zod": "^3.23.6"
+    "zod": "^3.23.7"
   }
 }

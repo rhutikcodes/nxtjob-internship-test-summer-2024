@@ -2,13 +2,15 @@
   "scripts": {
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
-    "create-db:remote":"npx wrangler",
-    "db-migrate:dev": "npx wrangler d1 migrations apply coding-task --local",
-    "db-migrate:remote": "npx wrangler d1 migrations apply coding-task --remote"
+    "create-db:remote": "npx wrangler",
+    "db:dev": "npx wrangler d1 migrations apply coding-task --local",
+    "db:remote": "npx wrangler d1 migrations apply coding-task --remote "
   },
   "dependencies": {
     "@prisma/adapter-d1": "^5.13.0",
-    "hono": "^4.3.2"
+    "coding-project": "^0.0.5",
+    "hono": "^4.3.2",
+    "uuidv7": "^0.6.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240403.0",
