@@ -6,6 +6,7 @@ import type { WebSocket as CFWebSocket } from '@cloudflare/workers-types'
 
 
 
+
 type Bindings = {
   DB: D1Database;
   MY_VAR: string;
@@ -72,7 +73,6 @@ app.get('/ws',async(c)=>{
   if (upgradeHeader !== 'websocket') {
     return c.text('Expected websocket', 400)
   }
-
   const webSocketPair = new WebSocketPair()
   const client = webSocketPair[0]
   const server = webSocketPair[1] as unknown as CFWebSocket
@@ -82,8 +82,11 @@ app.get('/ws',async(c)=>{
         if(data)
           { 
             server.send(data)
+        
           }
   })
+
+ 
   return new Response(null, {
     status: 101,
     webSocket: client,
