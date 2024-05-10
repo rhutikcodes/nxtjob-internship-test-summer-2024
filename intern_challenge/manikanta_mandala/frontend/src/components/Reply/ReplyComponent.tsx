@@ -1,15 +1,15 @@
 import { Icon, IconType } from "../Icons/Icon";
 import { UserIcon } from "../UserIcon/UserIcon";
 
-interface ReplyItemProps{
+export interface ReplyItemProps{
 	username: string;
 	timestamp: number;
-	discription: string;
+	description: string;
 	like: string;
 	reply: string;
 };
 
-export function ReplyItem({username, timestamp, discription, like, reply}: ReplyItemProps){
+export function ReplyItem({username, timestamp, description, like, reply}: ReplyItemProps){
 
 	// we can use moment.js for this
 	function formatTimestamp(time: number) {
@@ -29,6 +29,7 @@ export function ReplyItem({username, timestamp, discription, like, reply}: Reply
 				flex
 				flex-row
 				my-3
+				mx-4
 				rounded-xl
 				gap-3
 				p-3
@@ -70,7 +71,7 @@ export function ReplyItem({username, timestamp, discription, like, reply}: Reply
 							text-grey-400
 						"
 					>
-					{discription}
+					{description}
 				</div>
 				<div className="
 						flex

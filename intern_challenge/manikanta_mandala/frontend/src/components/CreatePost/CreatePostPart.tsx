@@ -5,7 +5,7 @@ export function CreatePostPart(){
 	return (
 		<div className=" rounded-2xl bg-white">
 			<div className=" px-4 ">
-				<textarea className=" w-full h-[300px] resize-none py-4 " 
+				<textarea name="text" className=" w-full h-[300px] resize-none py-4 " 
 					placeholder="What do you want to talk about"/>
 			</div>
 			<div className=" px-4 ">

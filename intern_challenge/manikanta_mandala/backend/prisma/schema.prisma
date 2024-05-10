@@ -17,39 +17,57 @@ datasource db {
 model Post {
 	id        Int      @id @default(autoincrement())
 	createdAt DateTime @default(now())
-	title     String   @db.VarChar(255)
-	content   String?
-	likes	  Int      @default(0)
-	commentsNo Int      @default(0)
-	author    User     @relation(fields: [authorId], references: [id])
-	authorId  Int
+	content   String
+	likes	  Int       @default(1)
+	author    User?     @relation(fields: [authorId], references: [id]) 
+	authorId  Int?		@default(0) // 0 is the default value for anonymous users
+	room	  Room		@relation(fields: [roomId], references: [id])
+	roomId	  Int
 	comments Comment[]
+	tags	 Tag[]
+	// bookmarks Profile[]
+}
+
+// Tag schema
+model Tag{
+	id Int @id @default(autoincrement())
+	name String @unique
+	posts Post[]
+}
+
+// Room schema
+model Room{
+	id Int @id @default(autoincrement())
+	name String @unique
+	posts Post[]
 }
 
 // Profile schema
 model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+	id     Int     @id @default(autoincrement())
+	bio    String?
+	user   User    @relation(fields: [userId], references: [id])
+	userId Int     @unique
+	// Bookmarks Post[]
 }
 
 // Comment schema
 model Comment {
-  id        Int      @id @default(autoincrement())
-  timestamp DateTime @default(now())
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
+	id        Int      @id @default(autoincrement())
+	text	  String
+	timestamp DateTime @default(now())
+	post      Post     @relation(fields: [postId], references: [id])
+	postId    Int
+	user      User     @relation(fields: [userId], references: [id])
+	userId    Int
 }
 
 // User schema
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
-  name     String?
-  posts    Post[]
-  profile  Profile?
-  comments Comment[]
+	id       Int      @id @default(autoincrement())
+	email    String   @unique
+	name     String?
+	posts    Post[]
+	profile  Profile?
+	comments Comment[]
 }

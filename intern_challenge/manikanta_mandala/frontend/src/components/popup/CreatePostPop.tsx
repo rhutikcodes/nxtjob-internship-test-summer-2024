@@ -4,9 +4,11 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import './styles.css';
 import { CreatePostPart } from '../CreatePost/CreatePostPart';
 
-const CreatePost= () => (
+export default (isPost: Boolean) => (
   <Dialog.Root>
     <Dialog.Trigger asChild>
+		{
+			isPost?
 		<div
 			className="
 				rounded-full
@@ -18,14 +20,18 @@ const CreatePost= () => (
 				p-3
 				mx-4
 				bg-grey-50
+				cursor-pointer
 			"
 		>
 			Start a post
 		</div>
+		:
+		"hello"
+		}
     </Dialog.Trigger>
     <Dialog.Portal>
       <Dialog.Overlay className="DialogOverlay " />
-      <Dialog.Content className="DialogContent font-inter rounded-2xl">
+      <Dialog.Content className="DialogContent font-inter rounded-md">
 		<div className="
 				bg-grey-50
 				p-4
@@ -82,5 +88,3 @@ const CreatePost= () => (
     </Dialog.Portal>
   </Dialog.Root>
 );
-
-export default CreatePost;

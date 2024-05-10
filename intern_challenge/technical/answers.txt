@@ -1,11 +1,102 @@
 1. Attach a prisma.schema or schema.ts (Drizzle) file from one of your past projects where you have used Prisma or Drizzle ORM.
-->
+-> 
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model: who is the user?
+model User {
+    id              Int      @id @default(autoincrement())
+    email           String   @unique
+    name            String   @unique
+    password        String
+    versionSelected Int      @unique
+    version         Version  @relation(fields: [versionSelected], references: [id])
+}
+
+// Version model: what is the version of the resume? (example: Java developer, Python developer, Full stack javascript developer, etc..)
+model Version {
+  id          Int          @id @default(autoincrement())
+  name        String?      @unique
+  description Description?
+  experience  Experience[]
+  project     Project[]
+  skill       Skill[]
+  user        User?
+}
+
+// Project model: what are the projects that the user has worked on?
+model Project {
+  id          Int      @id @default(autoincrement())
+  projectName String
+  topics      String[]
+  description String[]
+  link        String
+  versionId   Int
+  version     Version  @relation(fields: [versionId], references: [id])
+}
+
+// Experience model: what is your work experience?
+model Experience {
+  id          Int      @id @default(autoincrement())
+  companyName String
+  companyLink String
+  role        String
+  description String[]
+  link        String?
+  versionId   Int
+  version     Version  @relation(fields: [versionId], references: [id])
+}
+
+// Skill model: what are the skills of the user?
+model Skill {
+  id        Int      @id @default(autoincrement())
+  category  String   @unique
+  skills    String[]
+  versionId Int
+  version   Version  @relation(fields: [versionId], references: [id])
+}
+
+// Description model: what is the description of the resume version
+model Description {
+  id          Int     @id @default(autoincrement())
+  category    String  @unique
+  description String
+  versionId   Int     @unique
+  version     Version @relation(fields: [versionId], references: [id])
+}
+
+// Contacts model: what are the contacts of the user?
+model Contacts {
+  id       Int    @id @default(autoincrement())
+  category String @unique
+  link     String
+}
+
+// Eduction model: what eduction do you have?
+model Education {
+  id          Int      @id @default(autoincrement())
+  school      String   @unique
+  schoolLink  String
+  description String[]
+}
 
 2. Explain, in your own words, the difference between "Edge Serverless" and "Serverless".
-->
+-> Serverless is a cloud computing model where the cloud provider manages the 
+infrastructure and automatically allocates resources as needed.
+-> Edge Serverless is a serverless computing model that runs code closer to the user which happens to perform well with low latency
 
 3. Describe when and where you usually encounter bugs in your development process.
-->
+-> I usually encounter bugs when the technologies that the project has is new to me (skill issues).
+-> For example, When I started doing my first project in prisma and cloudflare workers.
+-> cloudflare workers gave an error that It only accepts Prismas accelerate.
 
 4. Discuss the importance of maintaining clean and readable code. What best practices do you follow to structure and write code for ease of reading?
-->
+-> Clean and readable code is important because it makes the code more understandable and maintainable.
+-> first thing I do is write meaningful comments, and TODO comments
+-> following coding principle like DRY, KISS and SOLID

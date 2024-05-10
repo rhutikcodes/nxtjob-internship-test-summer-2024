@@ -1,14 +1,12 @@
-// import { PostItem } from "../Post/PostItem";
 import { PostItem } from "../Post/PostItem";
 import { TagItems } from "../Tags/tagItems";
 import { UserIcon } from "../UserIcon/UserIcon";
-import FormDialog from "../popup/PopExample";
+import FormDialog from "../popup/CreatePostPop";
 
 export function MainBody(){
 	return (
 		<main
 			className="
-				bg-neutral-100
 				flex
 				flex-col
 				m-auto
@@ -105,9 +103,17 @@ export function MainBody(){
 				<PostItem
 					username="Person1"
 					timestamp= {new Date().getTime()}
-					discription="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 					like="10k"
 					reply="5k"
+					Replies={[{
+						username: "Person2",
+						timestamp: new Date().getTime(),
+						description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+						like: "1k",
+						reply: "500"
+
+					}]}
 				/>
 
 			</div>

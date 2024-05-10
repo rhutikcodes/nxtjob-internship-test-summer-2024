@@ -1,6 +1,6 @@
 import { TagItems } from "../Tags/tagItems";
 import { UserIcon } from "../UserIcon/UserIcon";
-import FormDialog from "../popup/PopExample";
+import CreatePostDialog from "../popup/PopExample";
 
 export function GreetComponent(){
 	return(
@@ -50,7 +50,7 @@ export function GreetComponent(){
 				<UserIcon
 					username="Person1"
 				/>
-				<FormDialog/>
+				<CreatePostDialog isPost={true}/>
 
 			</div>
 			<div 

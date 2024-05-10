@@ -9,5 +9,7 @@ yarn.lock
 pnpm-lock.yaml
 bun.lockb
 
-# dotenv file
+.idea
+
 .env
+wrangle.toml
