@@ -1,0 +1,62 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Post {
+  postId     String    @id @default(uuid())
+  userId     String
+  channelId  String
+  content    String
+  attachment String?
+  tagId      String[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  User       User      @relation(fields: [userId], references: [userId])
+  Comments   Comment[]
+  LikedBy    UserLikes[]  // Relations to UserLikes join table
+  @@index([channelId, createdAt], name: "idx_channelId_createdAt")
+}
+
+model User {
+  userId     String    @id @default(uuid())
+  username   String    @unique
+  createdAt  DateTime  @default(now())
+  Posts      Post[]
+  Comments   Comment[]
+  Likes      UserLikes[]  // Relations to UserLikes join table
+  bookmarks    String[]  @default([])  // Array of postIds that are bookmarked
+  @@index([userId], name: "idx_userId")
+}
+
+model UserLikes {
+  user      User   @relation(fields: [userId], references: [userId])
+  userId    String
+  post      Post   @relation(fields: [postId], references: [postId])
+  postId    String
+
+  @@id([userId, postId])  // Composite primary key
+}
+
+model Comment {
+  commentId  String   @id @default(uuid())
+  postId     String
+  fromUserId String   // Renamed from 'userId' to 'fromUserId'
+  channelId  String
+  content    String
+  likes      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Post       Post     @relation(fields: [postId], references: [postId])
+  User       User     @relation(fields: [fromUserId], references: [userId])
+}
+
+
+
