@@ -10,3 +10,10 @@ export const userParamsTypeSchema = z.object({
 
 
 export type userParamsType = z.infer<typeof userParamsTypeSchema>;
+
+
+export const postContentParamTypeSchmea = z.object({ 
+    postContent:z.string().max(70).nullable()
+})
+
+export type postContentParamType = z.infer<typeof postContentParamTypeSchmea>

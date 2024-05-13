@@ -9,6 +9,8 @@ import { UseSelector,useDispatch, useSelector } from 'react-redux'
 import { RootState,AppDispatch } from '../../store'
 import { PostComponent } from '@/features/userData/userDataSlice'
 import { useState } from 'react'
+import axios from 'axios'
+
 
 
 export default function CreatePost() {
@@ -18,19 +20,15 @@ const [content,setContent] = useState<string>("");
 const [ws, setWs] = useState<WebSocket | null>(null);
 
 
-useEffect(() => {
-  
-  console.log("useEffect called 1");
-  websocket()
+const id = useSelector((state:RootState)=>state.userInfo.id)
 
-  /* eslint-disable react-hooks/exhaustive-deps */
-}, []);
+const dispatch = useDispatch<AppDispatch>();
 
 
-
+//using cloudfare websocket
     async function websocket() {
-    
-      const newWs = new WebSocket("wss://coding-task.shishirkj08.workers.dev/ws");
+    console.log("call")
+      const newWs = new WebSocket(" ws://127.0.0.1:8787/ws/");
 
       newWs.addEventListener('open', () => {
         console.log('Opened websocket');
@@ -38,8 +36,8 @@ useEffect(() => {
       });
   
       newWs.addEventListener('message', ({data}) => {
-        console.log('Message received from server');
-        console.log(data);
+        console.log('Message received from server:',data);
+      ;
    
       });
   
@@ -50,10 +48,6 @@ useEffect(() => {
   
       setWs(newWs);    
     }
-
-
-
-
     const closeConnection = () => {
       if (ws) {
         ws.close();
@@ -69,11 +63,32 @@ useEffect(() => {
 
 
 
- function sendPost(e:React.MouseEvent<HTMLElement>)
+ async function sendPost(e:React.MouseEvent<HTMLElement>)
 {
-     ws?.send(content)
+
+  try {
+    
+    const API_BASE_URL =process.env.NEXT_PUBLIC_MODE === "production"? "https://blinkchat-nu.vercel.app": "http://localhost:3000";
+    //  ws?.send(content)
+ 
+
+   const res = await axios.post(`${API_BASE_URL}/api/sendMessage`,{content:content})
+
+
+   if(res?.data?.mssg)
+    { console.log(res.data.mssg)
+      await axios.post("https://coding-task.shishirkj08.workers.dev/api/v1/createPost",{content:content,userId:id})
+          
+    }
+
+
 
     setContent('') 
+    dispatch(PostComponent())
+  } catch (error:unknown) {
+    console.log(error)
+  }
+ 
 }
 
 
@@ -81,7 +96,6 @@ useEffect(() => {
 
 
 
-  const dispatch = useDispatch<AppDispatch>();
 
   // let showcreatePostComponent = useSelector((state:RootState)=>state.userInfo.showcreatePostComponent)
  

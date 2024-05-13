@@ -1,4 +1,4 @@
-import React from 'react'
+  import React from 'react'
 import Image from 'next/image'
 export default function CreatePostIcons({icon,width,height}:{icon:string,width:number,height:number}) {
   return (

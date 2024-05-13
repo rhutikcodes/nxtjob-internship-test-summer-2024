@@ -1,12 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
 import {userParamsType} from "coding-project"
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { fetchUserDetails } from './userDataApi'
-
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 interface reduxUserParamsTypes extends userParamsType{ 
   status:string,
   error:any,
-  showcreatePostComponent:boolean
+  showcreatePostComponent:boolean,
+  showcreateCommentComponent:string|number
+  id: string | null;
+    firstName: string | null;
+    lastName: string | null;
+    emailAddress: string | null;
+    image?: string | null | undefined;
 } 
 
 
@@ -20,7 +25,8 @@ const initialState:reduxUserParamsTypes = {
  emailAddress:null,
  showcreatePostComponent:false,
  status:'',
- error:''
+ error:'',
+ showcreateCommentComponent:0,
 }
 
 
@@ -39,8 +45,23 @@ export const userInfoSclice = createSlice({
   name: 'userInfo',
   initialState,
 reducers:{
+  // toggling createPost component
     PostComponent: (state) => {
       state.showcreatePostComponent = !state.showcreatePostComponent;
+    },
+     // toggling createComment component
+    CommentComponent: (state,action: PayloadAction<string|number>) => {
+     if(typeof action.payload==='string')
+      {
+            const parsedPayload = parseInt(action.payload)
+           
+            state.showcreateCommentComponent = parsedPayload;
+      }
+      else
+      {
+            const stringifyPayload = action.payload.toString()
+            state.showcreateCommentComponent = stringifyPayload
+      }
     }
 },
     //reducers
@@ -68,5 +89,5 @@ reducers:{
   });
   
 
-  export const { PostComponent } = userInfoSclice.actions;
+  export const { PostComponent,CommentComponent} = userInfoSclice.actions;
 export default userInfoSclice.reducer
