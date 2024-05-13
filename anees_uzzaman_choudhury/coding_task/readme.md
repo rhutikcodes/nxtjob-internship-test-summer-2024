@@ -21,6 +21,7 @@ A Community App where users can post content, receive real-time updates, react t
 - **Responsive Design**: Fully responsive design ensures a seamless user experience across all device sizes.
 - **Collapsing Sidebar**: Features a collapsible sidebar for quick navigation between different sections of the application, optimizing space on smaller screens.
 - **Instant Feedback**: Instant feedback available wether an operation was successful or not with the help of react hot toast library
+- **Caching**: Implemented Prisma Accelerate for efficient connection pooling and optimized query performance by utilizing TTL (Time To Live) and SWR (Stale While Revalidate) caching strategies. This approach significantly improves data retrieval times and reduces database load, ensuring a faster and more scalable application.
 
 ## Technology Stack
 
