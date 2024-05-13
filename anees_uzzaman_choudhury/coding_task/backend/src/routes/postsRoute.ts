@@ -88,6 +88,10 @@ posts.get("/:channelId", async (c) => {
   
     try {
       const posts = await prisma.post.findMany({
+        cacheStrategy: {
+          ttl: 20, // Cache the response for 20 seconds
+          swr: 6, // Enable stale-while-revalidate for 6 seconds
+        },
         where: {
           channelId: channelId, // Filter posts by channelId
         },

@@ -31,9 +31,13 @@ app.get('/api/v1/counts', async (c) => {
 }).$extends(withAccelerate())
   try {
       const counts = await prisma.post.groupBy({
+
           by: ['channelId'],
           _count: {
               channelId: true,
+          },
+          cacheStrategy: {
+                ttl: 8, // Cache for 8 seconds
           },
           where: {
               // Any filters if needed, e.g., isActive, not deleted, etc.
