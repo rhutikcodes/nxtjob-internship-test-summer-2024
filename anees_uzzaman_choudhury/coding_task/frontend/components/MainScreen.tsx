@@ -3,16 +3,13 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import React, { useEffect, useState } from "react";
 import { FaRegCommentDots } from "react-icons/fa";
 import { CiCirclePlus } from "react-icons/ci";
-import { BookmarkFilledIcon, BookmarkIcon } from '@radix-ui/react-icons'
 import ChangeLikes from "./ChangeLikes";
 import { useSpring, useScroll, motion } from "framer-motion"
 import { commentAdded, selectTag } from "@/lib/features/posts/postSlice";
 import CommentsCard from "./CommentsCard";
 import axios from "axios";
-import LoginModal from "@/framer/LoginModal";
 import BookmarkButton from "@/Hooks/AddBookmarks";
 import toast from "react-hot-toast";
-export const dynamic = 'force-dynamic'
 
 const MainScreen = () => {
   const dispatch = useAppDispatch();
