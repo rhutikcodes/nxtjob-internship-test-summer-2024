@@ -9,7 +9,7 @@ import { CommentComponent } from '@/features/userData/userDataSlice'
 import Comment from './Comment'
 import CommentsLengthComponentToStore from '@/features/postData/postDataSlice'
 import { pusherClient } from '@/app/lib/pusher'
-
+import Loading from './Loading'
 
 interface postArrayType{ 
   content:string,
@@ -171,7 +171,7 @@ function toggleCommentComponent(postId:number){
         {/* message starting */}
 
         {
-  (postArray.length!=0)&&
+  (postArray.length!=0)?
   
   postArray.map((content)=>(
     // not a good practise to use index
@@ -242,7 +242,8 @@ function toggleCommentComponent(postId:number){
 </div>
 </div>
   ))
-
+:
+<Loading/>
   }
 
 

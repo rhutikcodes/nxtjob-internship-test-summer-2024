@@ -12,7 +12,7 @@ import CreatePost from './components/shared/CreatePost'
 import { pusherClient } from './lib/pusher'
 import { useState } from 'react'
 import { PostComponentToStore } from '@/features/postData/postDataSlice'
-
+import Loading from './components/shared/Loading'
 
 
 
@@ -129,8 +129,9 @@ async function handleSock(){
 
   return (
     <div>
-     
-<Theme>
+  {
+status==='loading'?<Loading/>:(
+  <Theme>
       <div className='flex'>
       <SideBar/>
     
@@ -146,6 +147,9 @@ async function handleSock(){
       
       </div>
       </Theme>
+
+)
+  }   
 
     </div>
   )

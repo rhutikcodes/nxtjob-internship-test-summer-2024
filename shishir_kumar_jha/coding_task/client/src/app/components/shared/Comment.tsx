@@ -6,7 +6,7 @@ import { CommentComponent } from "@/features/userData/userDataSlice";
 import { pusherClient } from "@/app/lib/pusher";
 import axios from "axios";
 import { CommentsLengthComponentToStore } from "@/features/postData/postDataSlice";
-
+import Loading from "./Loading";
 export default function Comment({roomId}:{roomId:string}) {
 
 
@@ -126,7 +126,7 @@ setComment(e.target.value)
           <div className="h-64 overflow-y-auto">
             <div className="space-y-4">
 
-             {(commentArray.length!=0)&&commentArray.map((comment,index)=>( 
+             {(commentArray.length!=0)?commentArray.map((comment,index)=>( 
                 <div key={index}>
                   <div className="flex items-start">      
                <div className="bg-gray-100 rounded-lg p-4 flex-1">
@@ -134,7 +134,7 @@ setComment(e.target.value)
                </div>
              </div>
                         </div>
-             ))}
+             )):<Loading/>}
               
         
             </div>
