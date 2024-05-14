@@ -5,16 +5,17 @@ import { usePathname } from 'next/navigation'
 import React, { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 
+type ChannelCounts = {
+  introduction: number;
+  announcements: number;
+  success: number;
+  career: number;
+};
+
 const SideBar = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef<HTMLElement | null>(null);
-  type ChannelCounts = {
-    introduction: number;
-    announcements: number;
-    success: number;
-    career: number;
-};
 
 const [channelCounts, setChannelCounts] = useState<ChannelCounts>({
   introduction: 0,
@@ -29,7 +30,7 @@ useEffect(() => {
     try {
       const userId = localStorage.getItem('userId');
       if (!userId) {
-        // console.error('No user ID found, user must be logged in to fetch channel counts');
+        console.error('No user ID found, user must be logged in to fetch channel counts');
         return;
       }
       const response = await axios.get('https://backend.anees-azc.workers.dev/api/v1/counts', {
