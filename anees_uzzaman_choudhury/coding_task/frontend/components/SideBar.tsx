@@ -1,4 +1,5 @@
 "use client"
+import { BACKEND_URL } from "@/config";
 import axios from "axios";
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
@@ -33,7 +34,7 @@ useEffect(() => {
         console.error('No user ID found, user must be logged in to fetch channel counts');
         return;
       }
-      const response = await axios.get('https://backend.anees-azc.workers.dev/api/v1/counts', {
+      const response = await axios.get(`${BACKEND_URL}/api/v1/counts`, {
         params: {
           userId: userId
         }

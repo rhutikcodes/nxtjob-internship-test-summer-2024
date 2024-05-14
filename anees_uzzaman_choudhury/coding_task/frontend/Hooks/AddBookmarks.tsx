@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookmarkFilledIcon, BookmarkIcon } from '@radix-ui/react-icons';
 import toast from 'react-hot-toast';
+import { BACKEND_URL } from '@/config';
 
 const BookmarkButton = ({ postId }: { postId: string }) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
@@ -17,7 +18,7 @@ const BookmarkButton = ({ postId }: { postId: string }) => {
         }
   
         try {
-          const response = await axios.get(`https://backend.anees-azc.workers.dev/api/v1/users/${userId}/showBookmarkIds`);
+          const response = await axios.get(`${BACKEND_URL}/api/v1/users/${userId}/showBookmarkIds`);
           if (response.data && response.data.bookmarkIds) {
             setIsBookmarked(response.data.bookmarkIds.includes(postId));
           }
@@ -40,7 +41,7 @@ const BookmarkButton = ({ postId }: { postId: string }) => {
       setIsLoading(true);
   
       try {
-        const url = `https://backend.anees-azc.workers.dev/api/v1/users/${userId}/bookmark/${postId}`;
+        const url = `${BACKEND_URL}/api/v1/users/${userId}/bookmark/${postId}`;
 
         await axios.post(url);
         setIsBookmarked(!isBookmarked); 

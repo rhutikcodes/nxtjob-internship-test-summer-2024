@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { fetchBookmarksFailure, fetchBookmarksStart, fetchBookmarksSuccess } from '@/lib/features/bookmarks/bookmarksSlice';
 import Link from 'next/link';
+import { BACKEND_URL } from '@/config';
 
 
 
@@ -20,7 +21,7 @@ const BookmarksComponent = () => {
 
         dispatch(fetchBookmarksStart());
 
-        axios.get(`https://backend.anees-azc.workers.dev/api/v1/users/${userId}/bookmarks`)
+        axios.get(`${BACKEND_URL}/api/v1/users/${userId}/bookmarks`)
             .then(response => {
                 dispatch(fetchBookmarksSuccess(response.data.bookmarks));
             })

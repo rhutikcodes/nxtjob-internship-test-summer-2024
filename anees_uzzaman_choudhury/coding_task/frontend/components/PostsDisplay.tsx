@@ -8,6 +8,7 @@ import axios from 'axios';
 import { commentAdded } from '@/lib/features/posts/postSlice';
 import toast from 'react-hot-toast';
 import BookmarkButton from '@/Hooks/AddBookmarks';
+import { BACKEND_URL } from '@/config';
 
 const PostsDisplay = ({ visiblePosts, activePostId, setActivePostId, showCommentInput, setShowCommentInput, newComment, setNewComment }: any) => {
   const dispatch = useAppDispatch();
@@ -34,7 +35,7 @@ const PostsDisplay = ({ visiblePosts, activePostId, setActivePostId, showComment
     }
 
     try {
-      const response = await axios.post('https://backend.anees-azc.workers.dev/api/v1/comments', {
+      const response = await axios.post(`${BACKEND_URL}/api/v1/comments`, {
         postId,
         userId,
         content: newComment,

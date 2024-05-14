@@ -1,4 +1,5 @@
 "use client";
+import { BACKEND_URL } from '@/config';
 import LoginModal from '@/framer/LoginModal';
 import axios from 'axios';
 import React, { useState } from 'react';
@@ -27,7 +28,7 @@ const ChangeLikes = ({ post }: { post: any }) => {
     setLiked(!liked);
 
     try {
-      const response = await axios.post(`https://backend.anees-azc.workers.dev/api/v1/posts/${post.postId}/like`, { userId });
+      const response = await axios.post(`${BACKEND_URL}/api/v1/posts/${post.postId}/like`, { userId });
 
       // Verify the server response
       if (response.data.message !== (liked ? 'Unliked' : 'Liked')) {
