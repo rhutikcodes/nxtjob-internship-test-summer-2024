@@ -57,5 +57,63 @@ app.get('/api/v1/counts', async (c) => {
   }
 });
 
+// export const clients = new Set();
+
+ // WebSocket endpoint for real-time interactions and notifications
+// const userConnections = new Map(); // Map to hold userId and WebSocket connection
+
+// app.use('/ws', upgradeWebSocket(async (c) => {
+//     return {
+//         onOpen: (ws: any) => {
+//             console.log("Client connected");
+//             ws.onmessage = (evt: any) => {
+//                 const { type, userId, recipientId, content } = JSON.parse(evt.data);
+
+//                 if (type === 'register') {
+//                     userConnections.set(userId, ws);
+//                     console.log(`${userId} registered`);
+//                 } else if (type === 'send') {
+//                     console.log(`Message from ${userId} to ${recipientId}: ${content}`);
+//                     const recipientWs = userConnections.get(recipientId);
+//                     if (recipientWs) {
+//                         recipientWs.send(JSON.stringify({ from: userId, content }));
+//                     } else {
+//                         console.log(`Recipient ${recipientId} not connected.`);
+//                     }
+//                 }
+//             };
+
+//             ws.onclose = () => {
+                 // Remove user connection when they disconnect
+//                 userConnections.forEach((value, key) => {
+//                     if (value === ws) {
+//                         userConnections.delete(key);
+//                         console.log(`${key} disconnected`);
+//                     }
+//                 });
+//             };
+//         }
+//     };
+// }));
+
+// app.fire()  
+
+  
+  // Function to broadcast notifications to all connected clients
+// export function broadcastNotification(message: any) {
+//     console.log('Broadcasting notification:', message);
+//     clients.forEach((client: any) => {
+//         if (client.readyState === WebSocket.OPEN) {
+//             client.send(message);
+//         } else {
+//             console.log("Skipping closed connection");
+//         }
+//     });
+// }
+  
+  // Define other routes and middleware as necessary
+  
+app.fire();
+
 
 export default app
