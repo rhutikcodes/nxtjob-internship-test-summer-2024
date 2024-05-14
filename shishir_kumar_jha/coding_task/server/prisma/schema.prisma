@@ -8,36 +8,41 @@ generator client {
     url      = env("DATABASE_URL")
   }
   
-// model UserData {
-//   id        String      @id 
-//   image     String   @default("https://avatars.githubusercontent.com/u/124599?v=4")
-//   firstName String
-//   lastName  String
-//   email     String   @unique
-// }
+
+
+
+
+  
+model UserData {
+  id        String      @id 
+  image     String   @default("https://avatars.githubusercontent.com/u/124599?v=4")
+  firstName String
+  lastName  String
+  email     String   @unique
+}
 
 
 
 
 
-// model PostData {
-//   postId      String    @id @unique
-//   userId      String
-//   channelId   String
-//   content     String
-//   attachment  String?
-//   commentIdArray   String
-//   likes       Int
-//   tagIdArray       String
-//   createdAt   DateTime @default(now())
-//   updatedAt   DateTime @updatedAt
-// }
+model PostData {
+  postId      String    @id @unique
+  userId      String
+  channelId   String
+  content     String
+  attachment  String?
+  commentIdArray   String
+  likes       Int
+  tagIdArray       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
 
 
-// model NotificationData{
-//   id            String @id @unique 
-//   content       String
-// }
+model NotificationData{
+  id            String @id @unique 
+  content       String
+}
 
   // npx wrangler d1 migrations create coding-task create_user_table
 
