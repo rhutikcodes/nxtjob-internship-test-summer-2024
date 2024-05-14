@@ -3,6 +3,8 @@
 A Community App where users can post content, receive real-time updates, react to posts, and comment on each other's posts.
 - Live link [here](https://community-app.pages.dev/)
 
+#### Check the end of page to get started locally
+
 ## Features
 
 - **User Authentication**: Users can log in and log out of the application.
@@ -52,6 +54,76 @@ Database Schema of the application-
 
 
 Check out the live version of the Community App [here](https://community-app.pages.dev/) to explore all its features. 
+
+
+
+## Getting Started Locally
+
+This guide will walk you through setting up the NxtJob Community App locally on your machine for development and testing purposes.
+
+### Prerequisites
+
+- **Node.js**: Ensure you have Node.js installed on your machine. [Download Node.js](https://nodejs.org/en/download/)
+
+### Clone the Repository
+
+Start by cloning the repository to your local machine:
+
+```bash
+git clone https://github.com/aneesazc/NxtJob-Community-App.git
+cd NxtJob-Community-App
+```
+
+## Backend 
+1. Install Dependencies:
+- Navigate to the backend directory and install the necessary npm packages:
+```bash
+cd backend
+npm install
+```
+2. Environment Configuration:
+- Create a .env file in the backend directory.
+- Obtain a database URL instance from a service provider like Neon or Aiven.
+- Add the database URL to your .env file:
+```bash
+DATABASE_URL="your_database_url_instance"
+```
+
+3. Prisma Accelerate Setup:
+- Create a `wrangler.toml` file in the root of the backend directory.
+- Visit Prisma Data Platform Accelerate to get an Accelerate URL.
+- Add the Accelerate URL to your `wrangler.toml`:
+```bash
+[vars]
+DATABASE_URL="your_accelerate_url"
+```
+
+4. Start the Backend:
+```bash
+npm run dev
+```
+
+## Frontend
+1. Install Dependencies:
+- Navigate to the `frontend` directory:
+```bash
+cd ../frontend  # Assuming you're in the backend directory
+npm install
+```
+
+2. Configure BACKEND URL:
+- Go to config.ts file at the root of the frontend folder and replace `https://backend.anees-azc.workers.dev` with `http://127.0.0.1:8787/` and you should be fine.
+3. Run the Frontend:
+```bash
+npm run dev
+```
+- This will start your frontend application at localhost:3000 
+
+## Next Steps
+- Open your web browser and navigate to `http://localhost:3000` to view the application.
+- Begin developing or testing your changes to the application.
+
+
 
 
 
