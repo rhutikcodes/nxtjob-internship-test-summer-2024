@@ -4,11 +4,14 @@ import { pusherServer } from "@/app/lib/pusher";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { roomId, comment } = body;
-
-    await pusherServer.trigger(roomId, "comment-message", comment);
+    let { likeCount, postId } = body;
+    console.log(likeCount + 1, postId);
+    await pusherServer.trigger("likeRoom", "like-message", {
+      count: likeCount + 1,
+      id: postId,
+    });
     return NextResponse.json(
-      { success: "true", mssg: { roomId, comment } },
+      { success: "true", mssg: postId },
       { status: 201 }
     );
   } catch (error: unknown) {
