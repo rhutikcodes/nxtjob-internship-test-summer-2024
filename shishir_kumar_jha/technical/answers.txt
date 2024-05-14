@@ -1,0 +1,73 @@
+1. Attach a prisma.schema or schema.ts (Drizzle) file from one of your past projects where you have used Prisma or Drizzle ORM.
+
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["driverAdapters"]
+  }
+  
+  datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+  }
+  
+
+
+
+
+  
+model UserData {
+  id        String      @id 
+  image     String   @default("https://avatars.githubusercontent.com/u/124599?v=4")
+  firstName String
+  lastName  String
+  email     String   @unique
+}
+
+
+
+
+
+model PostData {
+  postId      String    @id @unique
+  userId      String
+  channelId   String
+  content     String
+  attachment  String?
+  commentIdArray   String
+  likes       Int
+  tagIdArray       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
+model NotificationData{
+  id            String @id @unique 
+  content       String
+}
+
+2. Explain, in your own words, the difference between "Edge Serverless" and "Serverless".
+-> Serverless means able to build and run  applications and services without having to manage the infrastructure and let the cloud 
+providers handle that like which OS to choose for the server and how much RAM to provide and when to spin up the server,etc..
+whereas in Edge Serverless and Serverless difference is
+Serverless=""Serverless"
+Edge Serverless ="CDN+SERVERLESS"
+CDN helps to create multiple duplicate of the serverless function in different parts of world and deliver the response from closest serverless funtion located geographically closer to the end user.
+This helps in  delivering faster responses ,managing traffic spikes and reduce server space requirements ,lower costs, ease of scalability
+but in serverless there will be only one server or the funciton in a static/fixed geographical loacation which increases latency if the user request is from very far  of the main srever 
+
+3. Describe when and where you usually encounter bugs in your development process.
+->I face bugs in using redux for state management since i dont use redux that much,handling the rerendering of page in infinte loop in nextjs/reactjs and complex typeerrors 
+
+4. Discuss the importance of maintaining clean and readable code. What best practices do you follow to structure and write code for ease of reading?
+->Clean and readable code is easier for other developers to understand and collaborate on.It makes  simpler for team members to work together effectively.
+When someone needs to modify or debug the code in the future, clean and well-structured code reduces the time and effort required to make changes
+Easier to spot errors and potential issues during code reviews and testing.Codebase remains manageable and scalable over time.
+
+Best practices
+Add comments to explain complex logic
+Follow a consistent coding style throughout your codebase such as naming conventions, spacing, and brace placement,(CameCase variables).
+Break down  code into smaller, modular components such as functions or files
+Instead of hardcoding values directly into  code, using named constants or variables to represent them
+Consistent Documentation

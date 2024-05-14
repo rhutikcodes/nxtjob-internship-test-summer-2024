@@ -1,0 +1,20 @@
+{
+  "name": "coding-project",
+  "license": "MIT",
+  "version": "0.0.10",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "release": "pnpm run build && changeset publish",
+    "lint": "tsc"
+  },
+  "devDependencies": {
+    "coding-project": "^0.0.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "zod": "^3.23.7"
+  }
+}

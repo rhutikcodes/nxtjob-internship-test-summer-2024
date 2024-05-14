@@ -1,0 +1,28 @@
+
+1. How do you stay updated on software development topics and remain active in the community? (Forums/Discord/Slack/Meetups/Twitter/Blogs)
+->Reading  Blogs of developer like  Hussain Nasser Samy Kamar 
+Youtube videos on new tech  like WebDev Simplified,hkirat and twitter and linkedin  
+
+2. What are your most-used IDE and keyboard shortcuts when coding?
+->VS code
+ctrl+c,v,x =>for copy,paste,and community
+ctrl+p => file change
+ctrl+alt+t => new terminal
+ctrl+shift=>selecting multiple lines
+alt+upper arrow=> move lines
+alt+tab =>window tab change
+ctrl+a=> in bash to reach starting of line  
+
+3. How do you approach the design and implementation of a scalable backend system? Feel free to attach code snippets for better explanation.
+->I try to design the backend and apis which i think i need and use eraser.io to do that.I  create the
+Schemas and model of the tables needed and the approach of code and any other third party apis or software using to make the projects
+I have added ScreenShots in the folder as well
+
+github link=>https://github.com/shishirkj/blinkchat
+todo github using caching small codebase=>https://github.com/shishirkj/todo-redis-nextjs
+
+4. How do you ensure that your frontend code is functional and reliable? What are your favorite testing methods and tools?
+->Performing manual testing to simulate real user interactions and catch issues that automated tests might miss.
+ Conducting peer code reviews to catch bugs, ensure code quality, and share knowledge among team members.
+ Ask my friends to use the applications and check the reliability and fcuntions of frontend and doing repetative usage of app  
+  I use pupeteer for simulating testing I am not familiar with testing but thinking of learning jest  for JS testing  

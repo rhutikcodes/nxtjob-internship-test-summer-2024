@@ -1,0 +1,34 @@
+node_compat = true
+
+name = "coding-task"
+
+compatibility_date = "2023-12-01"
+
+ [vars]
+MY_VAR = "my-variable"
+
+
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "coding-task"
+database_id = "1c6ed6fc-af62-4ecc-9803-5741df2b6f4b"
+
+
+
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
