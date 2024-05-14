@@ -9,60 +9,78 @@ const SideBar = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef<HTMLElement | null>(null);
-  const [channelCounts, setChannelCounts] = useState({
-    introduction: 0,
-    announcements: 0,
-    success: 0,
-    career: 0,
-  });
+  type ChannelCounts = {
+    introduction: number;
+    announcements: number;
+    success: number;
+    career: number;
+};
 
-  // Initialize prevChannelCounts from local storage or set to default values
-  const [prevChannelCounts, setPrevChannelCounts] = useState(() => {
+const [channelCounts, setChannelCounts] = useState({
+  introduction: 0,
+  announcements: 0,
+  success: 0,
+  career: 0,
+});
+
+// Initialize from local storage or use default values
+const [prevChannelCounts, setPrevChannelCounts] = useState(() => {
+  if (typeof window !== "undefined") {
     const savedCounts = localStorage.getItem('prevChannelCounts');
-    return savedCounts ? JSON.parse(savedCounts) : { introduction: 0, announcements: 0, success: 0, career: 0 };
-  });
-
-  useEffect(() => {
-    // Function to fetch the latest counts
-    const fetchChannelCounts = async () => {
-      try {
-        const userId = localStorage.getItem('userId');
-        if (!userId) {
-          console.error('No user ID found, user must be logged in to fetch channel counts');
-          return;
-        }
-        const response = await axios.get('https://backend.anees-azc.workers.dev/api/v1/counts', {
-          params: { userId }
-        });
-
-        // Trigger alerts if counts have increased
-        if (response.data.introduction > prevChannelCounts.introduction) {
-          toast('New notifications in introduction channel!', { icon: '🔔' });
-        }
-        if (response.data.announcements > prevChannelCounts.announcements) {
-          toast('New notifications in announcements channel!', { icon: '🔔' });
-        }
-        if (response.data.success > prevChannelCounts.success) {
-          toast('New notifications in success channel!', { icon: '🔔' });
-        }
-        if (response.data.career > prevChannelCounts.career) {
-          toast('New notifications in career channel!', { icon: '🔔' });
-        }
-
-        // Update previous counts to current counts after comparisons
-        setPrevChannelCounts(response.data);
-        // Also save to local storage
-        localStorage.setItem('prevChannelCounts', JSON.stringify(response.data));
-        setChannelCounts(response.data);
-      } catch (error) {
-        console.error('Failed to fetch channel counts:', error);
-      }
+    return savedCounts ? JSON.parse(savedCounts) : {
+      introduction: 0,
+      announcements: 0,
+      success: 0,
+      career: 0,
     };
+  }
+  return { introduction: 0, announcements: 0, success: 0, career: 0 };
+});
 
-    fetchChannelCounts();
-    const intervalId = setInterval(fetchChannelCounts, 10000); // Poll every 10 seconds
-    return () => clearInterval(intervalId); // Cleanup on unmount
-  }, []);
+const isFirstRender = useRef(true);
+
+useEffect(() => {
+  const fetchChannelCounts = async () => {
+    if (typeof window === "undefined") return;
+
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      console.error('No user ID found, user must be logged in to fetch channel counts');
+      return;
+    }
+    try {
+      const response = await axios.get('https://backend.anees-azc.workers.dev/api/v1/counts', {
+        params: { userId }
+      });
+      const newData = response.data;
+
+      console.log('New Data:', newData);
+      console.log('Previous Data:', prevChannelCounts);
+
+      if (!isFirstRender.current) {
+        Object.keys(newData).forEach(key => {
+          const channel = key as keyof typeof newData;
+          if (newData[channel] > prevChannelCounts[channel]) {
+            toast(`New notifications in ${channel as string} channel!`, { icon: '🔔' });
+          }
+        });
+      } else {
+        isFirstRender.current = false;
+      }
+
+      setChannelCounts(newData);
+      localStorage.setItem('prevChannelCounts', JSON.stringify(newData));
+      setPrevChannelCounts(newData);
+    } catch (error) {
+      console.error('Failed to fetch channel counts:', error);
+    }
+  };
+
+  fetchChannelCounts();
+  const intervalId = setInterval(fetchChannelCounts, 10000);
+  return () => clearInterval(intervalId);
+}, []);
+
 
 
   const handleLogout = () => {
