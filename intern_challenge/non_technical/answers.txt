@@ -1,12 +1,26 @@
 
 1. How do you stay updated on software development topics and remain active in the community? (Forums/Discord/Slack/Meetups/Twitter/Blogs)
-->
+-> I stay updated on software development topics mainly by following:
+	1. some forums in reddit like ThePrimeagenReact(https://www.reddit.com/r/ThePrimeagenReact/)
+	2. youtube channels like ThePrimeagen(https://www.youtube.com/@ThePrimeTimeagen), Theo-t3.gg(https://www.youtube.com/@t3dotgg), TJ DeVries(https://www.youtube.com/@teej_dv) etc..
+	3. Twitter ( I have created a twitter account mainly for TechUpdates)
 
 2. What are your most-used IDE and keyboard shortcuts when coding?
-->
+-> I use Text Editor neovim (https://neovim.io/) - I Personally developed my IDE (PIDE)
+   I use Intellij Idea for Java Development with vim motions
+   I used to use vscode with vim motions
 
 3. How do you approach the design and implementation of a scalable backend system? Feel free to attach code snippets for better explanation.
-->
+-> I basically follow agile method for development
+-> First I understand the problem statement (requirement) thoroughly
+-> Then I will search for any online references regarding the problem statement this 
+	include any articles, libraries, frameworks, documentations of those software
+-> then I will start designing the system in a paper
+-> develop the system
+-> test the system
+-> review if any bugs found and fix it and test again..
 
 4. How do you ensure that your frontend code is functional and reliable? What are your favorite testing methods and tools?
-->
+-> I mainly use DRY principle in my code: which tell don't repeat yourselves
+-> If the requirement violates the DRY then I will change to the requirement
+->  I don't have much experience in test the frontend code

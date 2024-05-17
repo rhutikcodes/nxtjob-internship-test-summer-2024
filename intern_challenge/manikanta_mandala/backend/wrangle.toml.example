@@ -1,0 +1,27 @@
+name = "backend2"
+compatibility_date = "2023-12-01"
+
+[vars]
+DATABASE_URL="YOUR_PRISMA_ACCELERATE_URL"
+# PASSWORD='zCnXxD7XGatHMoSfUv59lrucUFpgJtI3'
+# REDIS_CLOUD='redis-16191.c305.ap-south-1-1.ec2.redns.redis-cloud.com'
+# REDIS_PORT=16191
+# jBUZ3KsTOazsSLJRDUbRuXJoU2-5qzlH1Jmb7RhX
+REDIS_CLOUD="YOUR_REDIS_CLOUD_URL_FROM_UPSTASH"
+REDIS_TOKEN="YOUR_REDIS_TOKEN_FROM_UPSTASH"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
