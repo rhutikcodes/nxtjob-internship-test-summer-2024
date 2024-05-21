@@ -1,17 +1,41 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import React, { Suspense, lazy, useState, useEffect } from 'react';
-import { useSpring, useScroll, motion } from "framer-motion"
-import { commentAdded, selectTag } from "@/lib/features/posts/postSlice";
+import { useSpring, useScroll, motion } from "framer-motion";
+import { commentAdded, selectTag, setPosts } from "@/lib/features/posts/postSlice";
 import Loader from "./Loader";
+import { useFetchPostsByChannelQuery } from "@/lib/features/api/apiSlice";
 
 const PostsDisplay = lazy(() => import('./PostsDisplay'));
 
-const MainScreen = () => {
+const MainScreen = ({ channelId }: { channelId: string }) => {
   const dispatch = useAppDispatch();
   const posts = useAppSelector(state => state.posts.filteredPosts);
   const selectedTag = useAppSelector(state => state.posts.selectedTag);
   const searchTerm = useAppSelector(state => state.search.searchTerm);
+
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10); // Set the limit for the number of posts per page
+
+  const { data: paginatedPosts, isFetching, error } = useFetchPostsByChannelQuery({ channelId, page, limit });
+
+  useEffect(() => {
+    if (paginatedPosts) {
+      dispatch(setPosts(paginatedPosts.data)); // Assuming the API response has a 'data' field with the posts
+    }
+  }, [paginatedPosts, dispatch]);
+
+  const handleNextPage = () => {
+    if (paginatedPosts.meta.hasNextPage) {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
 
   // Combining filters for selected tag and search term
   const visiblePosts = posts.filter(post => {
@@ -51,7 +75,7 @@ const MainScreen = () => {
     document.addEventListener('scroll', handleScroll);
 
     return () => document.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [scrollYProgress]);
 
   return (
     <div>
@@ -87,10 +111,20 @@ const MainScreen = () => {
           newComment={newComment}
           setNewComment={setNewComment}
         />
+        {paginatedPosts && paginatedPosts.data.length > 0 && (
+          <div className="flex justify-between mt-4 mb-3">
+            <button onClick={handlePreviousPage} disabled={page <= 1}>
+              Previous
+            </button>
+            <span>{`Page ${page}`}</span>
+            <button onClick={handleNextPage} disabled={!paginatedPosts.meta.hasNextPage}>
+              Next
+            </button>
+          </div>
+        )}
       </Suspense>
     </div>
   );
 };
-
 
 export default MainScreen;

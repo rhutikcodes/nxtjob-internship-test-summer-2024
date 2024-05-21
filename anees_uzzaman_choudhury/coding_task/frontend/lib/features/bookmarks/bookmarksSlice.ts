@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Assuming your initial state and other imports are set up here
-
 interface BookmarkState {
   bookmarks: string[];
   loading: boolean;

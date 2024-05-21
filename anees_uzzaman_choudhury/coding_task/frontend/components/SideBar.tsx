@@ -17,40 +17,54 @@ const SideBar = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef<HTMLElement | null>(null);
+  const [notifCounts, setNotifCounts] = useState(0)
 
-const [channelCounts, setChannelCounts] = useState<ChannelCounts>({
-  introduction: 0,
-  announcements: 0,
-  success: 0,
-  career: 0,
-});
+  const [channelCounts, setChannelCounts] = useState<ChannelCounts>({
+    introduction: 0,
+    announcements: 0,
+    success: 0,
+    career: 0,
+  });
 
-useEffect(() => {
-  // Function to fetch the latest counts
-  const fetchChannelCounts = async () => {
-    try {
-      const userId = localStorage.getItem('userId');
-      if (!userId) {
-        console.error('No user ID found, user must be logged in to fetch channel counts');
-        return;
-      }
-      const response = await axios.get(`${BACKEND_URL}/api/v1/counts`, {
-        params: {
-          userId: userId
+
+  useEffect(() => {
+    // Function to fetch the latest counts
+    const fetchChannelCounts = async () => {
+      try {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+          console.error('No user ID found, user must be logged in to fetch channel counts');
+          return;
         }
-      });
-      setChannelCounts(response.data);
-    } catch (error) {
-      console.error('Failed to fetch channel counts:', error);
-    }
-  };
+        const response = await axios.get(`${BACKEND_URL}/api/v1/counts`, {
+          params: {
+            userId: userId
+          }
+        });
+        setChannelCounts(response.data);
 
-  // Fetch counts initially and set up polling
-  fetchChannelCounts();
-  const intervalId = setInterval(fetchChannelCounts, 10000); // Poll every 10 seconds
+        // const res2 = await axios.get(`${BACKEND_URL}/api/v1/comments${pathname}`, {
+        //   params: { userId: userId },
+        // });
 
-  return () => clearInterval(intervalId); 
-}, []);
+        // let newNotifCount = res2.data.notifCount;
+        // if (newNotifCount == 1) {
+        //   setNotifCounts(newNotifCount);
+        //   toast('New notification received', { icon: '🔔' });
+        // }
+
+
+      } catch (error) {
+        console.error('Failed to fetch channel counts:', error);
+      }
+    };
+
+    // Fetch counts initially and set up polling
+    fetchChannelCounts();
+    const intervalId = setInterval(fetchChannelCounts, 10000); // Poll every 10 seconds
+
+    return () => clearInterval(intervalId);
+  }, []);
 
 
 
@@ -128,7 +142,7 @@ useEffect(() => {
             </li>
             <li>
               <button className={`flex items-center p-2 text-gray-900 rounded-lg hover:bg-purple-400 link `}
-               onClick={handleLogout}
+                onClick={handleLogout}
               >
 
                 <span className="count pr-20">Log out</span>

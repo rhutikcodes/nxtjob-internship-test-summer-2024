@@ -20,7 +20,6 @@ export const makeStore = () => {
     });
 };
 
-// For use with your Redux hooks in components
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];

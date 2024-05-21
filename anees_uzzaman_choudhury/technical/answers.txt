@@ -11,7 +11,7 @@
   User       User      @relation(fields: [userId], references: [userId])
   Comments   Comment[]
   LikedBy    UserLikes[]  // Relations to UserLikes join table
-  @@index([channelId, createdAt], name: "idx_channelId_createdAt")
+  @@index([channelId])
 }
 
 model User {

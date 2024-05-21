@@ -11,7 +11,7 @@ export default function Success() {
       <NavBar headingVal="Success Stories" />
       <div className="flex">
         <SideBar />
-        <TopView headingVal="Success Stories" />
+        <TopView headingVal="Success Stories" channelId="success" />
       </div>
     </div>
   );

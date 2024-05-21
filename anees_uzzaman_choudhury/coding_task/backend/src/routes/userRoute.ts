@@ -19,7 +19,7 @@ users.post('/', async (c) => {
     const username = body.username;
 
     if (!username || username.trim() === '') {
-        return c.json({ message: 'Username is required' }, 400); // Bad Request
+        return c.json({ message: 'Username is required' }, 400);
     }
 
     try {

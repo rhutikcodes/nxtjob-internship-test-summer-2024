@@ -11,7 +11,7 @@ export default async function Introduction() {
       <NavBar headingVal="Introduction" />
       <div className="flex">
         <SideBar />
-        <TopView headingVal="Introduction"/>
+        <TopView headingVal="Introduction" channelId="introduction" />
       </div>
     </div>
   );

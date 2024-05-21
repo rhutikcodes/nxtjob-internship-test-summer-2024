@@ -1,4 +1,4 @@
-// reducer.js
+
 
 import { SET_SEARCH_TERM, CLEAR_SEARCH_TERM } from './action';
 

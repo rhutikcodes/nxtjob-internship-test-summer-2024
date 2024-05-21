@@ -11,7 +11,7 @@ export default function Announcements() {
       <NavBar headingVal="Announcements" />
       <div className="flex">
         <SideBar />
-        <TopView headingVal="Announcements" />
+        <TopView headingVal="Announcements" channelId="announcements" />
       </div>
     </div>
   );

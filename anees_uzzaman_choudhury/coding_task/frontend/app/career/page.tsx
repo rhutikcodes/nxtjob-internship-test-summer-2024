@@ -11,7 +11,7 @@ export default function CareerPage() {
       <NavBar headingVal="Career" />
       <div className="flex">
         <SideBar />
-        <TopView headingVal="Career" />
+        <TopView headingVal="Career" channelId="career" />
       </div>
     </div>
   )

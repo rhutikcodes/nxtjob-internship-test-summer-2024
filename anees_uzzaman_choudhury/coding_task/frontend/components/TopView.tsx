@@ -5,13 +5,13 @@ import MainScreen from './MainScreen';
 import LoginModal from '@/framer/LoginModal';
 import toast from 'react-hot-toast';
 
-const TopView = ({ headingVal }: { headingVal: string }) => {
+const TopView = ({ headingVal, channelId }: { headingVal: string, channelId: string }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
 
 
     const handleLoginModal = () => {
-        const userId = localStorage.getItem('userId'); 
+        const userId = localStorage.getItem('userId');
         if (!userId) {
             console.error('No user ID found, user must be logged in to like posts');
             setIsOpen(true);
@@ -26,7 +26,7 @@ const TopView = ({ headingVal }: { headingVal: string }) => {
 
     return (
         <div className='bg-gray-100 flex justify-center w-full'>
-            
+
             <div className='flex flex-col w-full max-w-4xl bg-white lg:ml-48 text-left pl-8'>
                 <div>
                     < svg className='hidden md:block' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" >
@@ -54,7 +54,7 @@ const TopView = ({ headingVal }: { headingVal: string }) => {
                         Start a post
                     </button>
                 </div>
-                <MainScreen />
+                <MainScreen channelId={channelId} />
 
 
                 {/* PostDialog component, passing props to control its visibility */}

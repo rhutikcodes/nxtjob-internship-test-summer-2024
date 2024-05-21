@@ -1,27 +1,41 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFetchPostsByChannelQuery } from '@/lib/features/api/apiSlice';
 import { useAppDispatch } from '@/lib/hooks';
 import { setPosts } from '@/lib/features/posts/postSlice';
 
 const GetPosts = ({ channelId }: { channelId: string }) => {
-  const { data: posts, isFetching, error } = useFetchPostsByChannelQuery(channelId);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10); // Set the limit for the number of posts per page
+  const { data: posts, isFetching, error } = useFetchPostsByChannelQuery({ channelId, page, limit });
   const dispatch = useAppDispatch();
 
-  // Effect to handle the dispatch whenever posts data changes
   useEffect(() => {
     if (posts) {
-      dispatch(setPosts(posts));
+      dispatch(setPosts(posts.data)); 
     }
   }, [posts, dispatch]);
+
+  const handleNextPage = () => {
+    if (posts.meta.hasNextPage) {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
 
   if (isFetching) return <div></div>;
   if (error) return <div>Failed to load posts</div>;
 
-  return null; 
+  return null;
 };
 
 export default GetPosts;
+
 
 
 

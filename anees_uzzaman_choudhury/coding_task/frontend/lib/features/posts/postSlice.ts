@@ -21,7 +21,7 @@ interface Post {
   likes: number;
   createdAt: string;
   updatedAt: string;
-  Comments: Comment[]; // Assuming Comment is another interface you have defined
+  Comments: Comment[];
 }
 
 interface PostState {
