@@ -1,0 +1,18 @@
+
+1. How do you stay updated on software development topics and remain active in the community? (Forums/Discord/Slack/Meetups/Twitter/Blogs)
+-> My main source to stay in touch with the tech community is through discord where I have joined a lot of channels such as coding cohorts and channels like Scrimba, Boot.dev.
+I also follow developer related youtubers such as Fireship and Primeagen
+
+2. What are your most-used IDE and keyboard shortcuts when coding?
+-> Other than Ctrl C, V and X, I use Ctrl D to select same words, Ctrl + Shift + L can be used to select occurences of a word. 
+Ctrl End and Ctrl Home as well
+
+3. How do you approach the design and implementation of a scalable backend system? Feel free to attach code snippets for better explanation.
+-> I like think in terms of most important requirements first and scale later although scaling stays in my mind.
+Then I like do the database design and make the api endpoints, that's half the job done. But I still might have to go back and 
+forth between the frontend and backend to make adjustments. Once I have an product I like think about optimizing it as much as possible and scale
+the system, wether through load balancing, rate limiting, message queues, pub subs or caching or some other strategy 
+
+4. How do you ensure that your frontend code is functional and reliable? What are your favorite testing methods and tools?
+-> I ensure I have clear skeleton, components and endpoints to begin with and that helps. I do use Jest for testing. 
+For testing I like to do as much manual testing as possible. I also check the perfomance with webvitals or other benchmarks.
